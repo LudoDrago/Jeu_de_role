@@ -140,7 +140,9 @@ function InitialiseValeur() {
     };
 }
 
-function mettreAJourMana() {document.getElementById("Joueur.Mana").textContent = `${Joueur.Mana}/${Joueur.manamax} 💧 `;}
+function mettreAJourMana() {
+    if (Joueur.Mana > Joueur.manamax) {Joueur.Mana = Joueur.manamax;}
+    document.getElementById("Joueur.Mana").textContent = `${Joueur.Mana}/${Joueur.manamax} 💧 `;}
 
 function jouerBoucleVideo() {
     video.play();
@@ -367,15 +369,15 @@ function validerChoix() {
     if (Joueur.race === 'dinosaure') {
         Joueur.skin = '🦖'; // Dinosaure
         Joueur.urlscreen = "url('../static/images/dino.jpg')";
-        bonusHp = 5
-        Joueur.hpmax += 25
-        Joueur.hp += 25
+        bonusHp = 5;
+        Joueur.hpmax += 25;
+        Joueur.hp += 25;
     }
     if (Joueur.race === 'dragon') {
-        bonusOr = 3
+        bonusOr = 3;
         Joueur.skin = '🐉'; // Dragon
         Joueur.urlscreen = "url('../static/images/dragon.jpg')";
-        Joueur.or += 100
+        Joueur.or += 100;
     }
     if (Joueur.race === 'sorcier' || Joueur.race === 'sorciere') {
         // Attribuer les bonus communs aux sorciers et sorcières
@@ -1818,7 +1820,9 @@ function OuvrirInventaire() {
         <p style="margin: 3px 0; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);">Or : ${Joueur.or}</p>
         <p style="margin: 3px 0; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);">Essence : ${Joueur.montantEssence}</p>
         <p style="margin: 3px 0; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);">Monstres vaincus : ${Joueur.nb_de_kill}</p>
-        <p style="margin: 3px 0; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);">Boss dans : ${10 - (Joueur.nb_de_kill % 10)} monstres</p>
+        <p style="margin: 3px 0; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);">
+        Boss dans : ${(Joueur.nb_de_kill % 10 === 0 && Joueur.nb_de_kill > 0) ? 'PROCHAIN MONSTRE' :
+        (10 - (Joueur.nb_de_kill % 10)) + ' monstres'}</p>
     `;
     containerGauche.innerHTML = joueurStats;
 
