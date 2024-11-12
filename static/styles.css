@@ -1,0 +1,348 @@
+/* styles.css */
+
+.background-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1; /* Derrière le contenu principal */
+
+}
+
+
+.background-video video {
+  filter: brightness(2) ;
+  width: 100vw;
+  height: auto;
+  object-fit: cover;
+  object-position: center bottom; /* Centre horizontalement et positionne vers le haut */
+  clip-path: inset(0 0 8.5% 0); /* Coupe 12% du bas */
+
+}
+
+
+/* Style général des boutons */
+button {
+    font-size: 30px;         /* Agrandit le texte */
+    padding: 15px 30px;      /* Agrandit les boutons avec du remplissage interne */
+    margin: 10px;            /* Espace autour de chaque bouton */
+    border-radius: 8px;      /* Arrondit légèrement les coins */
+    background-color: #4CAF50; /* Change la couleur de fond */
+    color: white;            /* Change la couleur du texte */
+    border: none;            /* Supprime la bordure */
+    cursor: pointer;         /* Change le curseur pour indiquer un clic possible */
+}
+
+/* Style au survol (effet visuel) */
+button:hover {
+    background-color: #45a049; /* Couleur légèrement plus sombre au survol */
+}
+
+@font-face {
+    font-family: 'MaPolicePersonnalisée';
+    src: url('fonts/EnchantedLand.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    /*text-shadow: 0 0 10px white, 0 0 0px white; /* Ombre blanche */
+    text-shadow:
+        0 0 5px rgba(255, 255, 255, 1), /* Couche de lumière proche */
+        0 0 15px rgba(255, 255, 0, 0.5), /* Couche de lumière intermédiaire */
+        0 0 20px rgba(255, 255, 0, 0.3); /* Couche de lumière diffuse */
+    font-family: 'MaPolicePersonnalisée', sans-serif;
+    font-size: 30px;
+    background-color: black;
+    background-size: cover; /* L'image couvre toute la page */
+    background-position: top-left; /* Centrée */
+    background-attachment: fixed; /* L'image reste fixe lors du scroll */
+    background-repeat: no-repeat; /* Pas de répétition de l'image */
+    margin: 0; /* Retirer les marges pour que l'image couvre tout */
+}
+
+.valider {
+    background-color: #4CAF50; /* Couleur de fond verte */
+    color: blue; /* Couleur du texte */
+    border: none; /* Pas de bordure */
+    padding: 10px 20px; /* Espacement interne */
+    text-align: center; /* Centrer le texte */
+    text-decoration: none; /* Pas de soulignement */
+    display: inline-block; /* Pour utiliser margin et padding */
+    font-size: 16px; /* Taille de la police */
+    margin: 4px 2px; /* Marges */
+    cursor: pointer; /* Curseur en main au survol */
+    border-radius: 5px; /* Coins arrondis */
+}
+
+.valider:hover {
+    background-color: #45a049; /* Couleur au survol */
+}
+
+/* Aligne le contenu du magasin à gauche */
+.test {
+    text-align: left;        /* Aligne le contenu à gauche */
+    font-size: 2px;         /* Taille de la police plus petite */
+}
+
+/* Style pour la modale de genre */
+#genreModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Arrière-plan semi-transparent */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Au-dessus des autres éléments */
+}
+
+
+#choixRaceSection {
+    margin-left: 15px;
+}
+
+#choix_nom_joueur {
+    margin-left: 15px;
+}
+
+#messages {
+    margin-left: 15px;
+    font-size: 50px;
+}
+
+.magasin {
+    display: flex;               /* Utilise flexbox pour le conteneur */
+    flex-direction: column;      /* Aligne les boutons verticalement */
+}
+
+/* Assurer que chaque bouton et message sont alignés sur la même ligne */
+.magasin div {
+    display: flex;           /* Utilise flexbox pour aligner les éléments */
+    align-items: center;     /* Centre verticalement les éléments */
+    margin-bottom: 10px;     /* Espacement entre les lignes */
+    width: 100%;             /* Assurer que le div prend toute la largeur */
+    box-sizing: border-box;  /* Inclure le padding et la bordure dans la largeur totale */
+}
+
+/* Style pour le message d'erreur */
+.message-error {
+    text-shadow: 0 0 10px white, 0 0 2px white;
+    width: 100%;
+    margin-left: 10px; /* Espacement à gauche du message */
+    color: black;        /* Couleur  pour les messages d'erreur */
+    font-size: 30px;   /* Taille de police pour le message */
+    display: block;    /* Permet de forcer l'affichage */
+}
+
+/* Style pour les boutons du magasin */
+.magasin button {
+    width: 1150px;        /* Définit une largeur fixe, ajuste comme souhaité */
+    height: 50px;        /* Définit une hauteur fixe, ajuste comme souhaité */
+    text-align: left;  /* Centre le texte */
+    margin: 0.5px 0;      /* Ajoute un espacement vertical entre les boutons */
+    font-size: 16px;     /* Taille de la police du texte du bouton */
+    border: none;        /* Pas de bordure */
+    background-color: #4CAF50; /* Couleur de fond des boutons */
+    color: white;        /* Couleur du texte */
+    border-radius: 5px;  /* Coins arrondis */
+    cursor: pointer;     /* Curseur en main au survol */
+    box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+}
+
+/* Style au survol (effet visuel) */
+.magasin button:hover {
+    background-color: #45a049; /* Couleur légèrement plus sombre au survol */
+}
+
+input[type="text"] {
+    font-size: 20px; /* Changez la taille selon vos préférences */
+    padding: 10px; /* Ajoute un peu d'espace à l'intérieur du champ */
+    margin-top: 5px; /* Ajoute un espace au-dessus du champ */
+}
+
+/* Conteneur de combat */
+#combatContainers {
+    display: flex;
+    flex-direction: column; /* Pour inclure containerA et containerB */
+    width: 100%;
+}
+
+.combat-row {
+    display: flex;         /* Conteneur A pour les containers 1 et 2 */
+    flex-direction: row;   /* Aligne container1 et container2 côte à côte */
+    width: 100%;           /* Prend toute la largeur */
+}
+
+.combat-container {
+    border: 0px solid #ccc; /* Ajouter des bordures visibles */
+    height: 50vh;           /* Chaque conteneur vertical prend la moitié de la hauteur */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#container1, #container2 {
+    width: 50%;             /* Prend chacun la moitié de la largeur */
+}
+
+
+#container1-2, #container2-2 {
+    flex: 1;
+    text-align: left;
+    font-size: 28px;
+    padding: 5px;
+    line-height: 0.2;
+    margin: 0;
+    position: relative; /* Permet le positionnement absolu de l'élément des dégâts */
+}
+
+.degats {
+    color: red;
+    font-size: 1.5em;
+    position: absolute;
+    top: 0; /* Ajuster pour positionner près du skin */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Styles pour le container choix_combat */
+#choix_combat {
+    display: flex;
+    flex-direction: row; /* Pour les boutons d'actions */
+    width: 100%;           /* Prend toute la largeur */
+    justify-content: center;      /* Centre les boutons horizontalement */
+    margin-top: 10px;           /* Optionnel : ajoute un espace au-dessus */
+}
+
+#container3 {
+    flex-direction: column;
+    transform: translate(0%, -50%);
+    font-size: 1.5em;
+
+}
+
+.combat-container.horizontal {
+    flex-direction: row;
+    width: 100%;            /* Prend toute la largeur pour le conteneur horizontal */
+    height: 20vh;           /* Ajuste la hauteur du conteneur horizontal */
+    display: flex;          /* Utiliser flexbox pour les boutons */
+    align-items: top;    /* Centre verticalement les boutons */
+    justify-content: flex-start; /* Espace égal entre les boutons */
+}
+
+#or-actuel {
+    text-shadow: 0 0 5px black, 0 0 20px black; /* Ombre noire */
+    background-color: #CC5500;     /* Couleur de fond orange */
+    font-size: 1.2em;              /* Taille de la police pour l’or */
+    color: #ffd700;                /* Couleur dorée pour l’or */
+    margin-top: 2px;
+    margin-bottom: 1px;
+    margin-left: 0px;             /* Centrer sur l’axe gauche/droite */
+    width: 580px;                 /* Alignement avec la largeur des boutons */
+    padding: 10px;                 /* Espacement interne pour le texte */
+    text-align: left;              /* Texte aligné à gauche */
+    border-radius: 5px;            /* Coins arrondis */
+    box-sizing: border-box;        /* Inclut le padding dans la largeur totale */
+}
+
+h1 {
+    margin-bottom: 5px; /* Ajuste la marge en bas du titre */
+    margin-left: 35px;
+}
+
+.inverse {
+    transform: scaleX(-1); /* Inverse l'élément horizontalement */
+}
+
+#container4 {
+    border-radius: 5px;
+    font-size: 3em;
+    margin-left: 15px;
+}
+
+#grimoire-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.bouton-retour-magasin-via-grimoire {
+    position: absolute;
+    top: 85%;
+    right: 42%;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    background-color: green;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 10; /* Pour s'assurer qu'il est visible au-dessus des autres éléments */
+    transition: background-color 0.3s;
+}
+
+.bouton-retour-magasin-via-grimoire:hover {
+    background-color: #555; /* Couleur de fond au survol */
+}
+
+.center-text-grimoire{
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.9rem;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.7); /* Ombre pour améliorer la lisibilité */
+    text-align: center;
+    pointer-events: none; /* Permet de cliquer à travers le texte */
+    z-index: 5; /* S’assure que le texte reste visible par-dessus l’image */
+}
+
+
+
+.sort-container:hover {
+    transform: scale(1.3); /* Agrandissement au survol */
+}
+
+/* Style du tooltip */
+.tooltip {
+    visibility: hidden;
+    width: 200px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    top: -20px; /* Ajustez la position si besoin */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip-title {
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.tooltip-description {
+    font-size: 1.6rem;
+}
+
+.sort-container:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}

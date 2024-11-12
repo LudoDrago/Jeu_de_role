@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Jeu de Rôle</title>
+    <link rel="stylesheet" href="../static/styles.css">
+    <link rel="icon" href="../static/images/favicon.ico" type="image/x-icon">
+    <link rel="preload" href="../static/images/arene1.jpg" as="image">
+    <link rel="preload" href="../static/images/arene2.jpg" as="image">
+    <link rel="preload" href="../static/images/arene3.jpg" as="image">
+    <link rel="preload" href="../static/images/arene4.jpg" as="image">
+    <link rel="preload" href="../static/images/arene5.jpg" as="image">
+    <link rel="preload" href="../static/images/arene6.jpg" as="image">
+    <link rel="preload" href="../static/images/arene7.jpg" as="image">
+    <link rel="preload" href="../static/images/arene8.jpg" as="image">
+    <link rel="preload" href="../static/images/arene9.jpg" as="image">
+    <link rel="preload" href="../static/images/arene10.jpg" as="image">
+    <link rel="preload" href="../static/images/arene11.jpg" as="image">
+    <link rel="preload" href="../static/images/arene12.jpg" as="image">
+    <link rel="preload" href="../static/images/arene13.jpg" as="image">
+    <link rel="preload" href="../static/images/arene14.jpg" as="image">
+    <link rel="preload" href="../static/images/arene15.jpg" as="image">
+    <link rel="preload" href="../static/images/arene16.jpg" as="image">
+    <link rel="preload" href="../static/images/arene17.jpg" as="image">
+    <link rel="preload" href="../static/images/arene18.jpg" as="image">
+    <link rel="preload" href="../static/images/arene19.jpg" as="image">
+    <link rel="preload" href="../static/images/arene20.jpg" as="image">
+    <link rel="preload" href="../static/images/arene21.jpg" as="image">
+    <link rel="preload" href="../static/images/chateau.jpg" as="image">
+    <link rel="preload" href="../static/images/areneboss.jpg" as="image">
+    <link rel="preload" href="../static/images/grimoire.jpg" as="image">
+</head>
+<body>
+    <audio id="sonVillage" src="../static/sons/village.mp3" loop></audio>
+    <audio id="sonEpee" src="../static/sons/epee.wav"></audio>
+    <audio id="SonMortJoueur" src="../static/sons/mort.wav"></audio>
+    <audio id="SonCoupVentre" src="../static/sons/coup_ventre.mp3"></audio>
+    <audio id="SonOsCasse" src="../static/sons/os_casse.mp3"></audio>
+    <audio id="SonYes" src="../static/sons/enfant_oui.mp3"></audio>
+    <audio id="SonCoins" src="../static/sons/coins.mp3"></audio>
+    <audio id="SonEchec" src="../static/sons/echec.mp3"></audio>
+    <audio id="SonBoss" src="../static/sons/son_boss.mp3"></audio>
+    <audio id="SonBossEntree1" src="../static/sons/son_boss1.mp3" loop></audio>
+    <audio id="SonBossEntree2" src="../static/sons/son_boss2.mp3"></audio>
+    <audio id="sonDragon" src="../static/sons/dragon.mp3"></audio>
+    <audio id="sonDino" src="../static/sons/dino.mp3"></audio>
+    <audio id="SonPotion" src="../static/sons/potion.mp3"></audio>
+    <audio id="SonRegen" src="../static/sons/regen.mp3"></audio>
+    <audio id="SonFleche" src="../static/sons/fleche.mp3"></audio>
+    <audio id="SonMalediction" src="../static/sons/malediction.mp3"></audio>
+    <audio id="SonInvincible" src="../static/sons/invincible.mp3"></audio>
+    <audio id="sonBaton" src="../static/sons/baton.mp3"></audio>
+
+    <div class="background-video">
+        <video id="background-video" autoplay loop muted playsinline>
+            <source src="../static/videos/foret5.mp4" type="video/mp4">
+        </video>
+    </div>
+    <h1>Bienvenue dans le Jeu de Rôle</h1>
+    <div id="or-actuel" style="display: none;">
+        Or : <span id="montantOr"></span>
+        &nbsp;&nbsp;Essence : <span id="Joueur.montantEssence"></span>
+        &nbsp;&nbsp;Mana : <span id="Joueur.Mana"></span>
+    </div>
+    <div id="choix_nom_joueur">
+        <label for="nomJoueur">Entrez votre nom : </label>
+        <input type="text" id="nomJoueur" placeholder="Votre nom ici" />
+        <br>
+        <button class="valider" onclick="saisirNom(); jouerSonVillage()">Soumettre</button>
+    </div>
+
+    <div id="choixRaceSection" style="display: none;">
+        <h2>Choisissez une Race :</h2>
+        <button onclick="choisirRace('humain')">Humain 👦🏻 / 👧🏼 </button>
+        <button onclick="choisirRace('dinosaure')">Dinosaure 🦖 </button>
+        <button onclick="choisirRace('dragon')">Dragon 🐉 </button>
+        <button onclick="choisirRace('sorcier')">Sorcier 🧙🏼‍♂️/ 🧝‍♀️ </button>
+    </div>
+
+    <div id="genreModal" style="display: none;">
+        <div id="genreModalContent">
+            <h3>Choisissez le genre :</h3>
+            <button onclick="choisirGenre('homme')">Garçon </button>
+            <button onclick="choisirGenre('femme')">Fille </button>
+            <button onclick="fermerModal()">Annuler</button>
+        </div>
+    </div>
+
+    <div id="messages">
+        <!-- Le message sera affiché ici -->
+    </div>
+
+    <button id="validationRace" class="valider" style="display: none; margin-left: 10px;" onclick="validerChoix()">Valider le choix</button>
+
+        <!-- Section magasin -->
+    <div id="magasin" class="magasin" style="display: inline-block;">
+        <!-- Les boutons seront générés ici par JavaScript -->
+    </div>
+
+    <!-- Ajout de la section pour le message d'erreur/succès -->
+    <div class="message-error" style="display: none;"></div>
+
+    <!-- Un bouton pour aller à la suite -->
+    <button id="suite" style="display: none" onclick="nettoyageEcran()">Suite</button>
+
+    <div id="combatContainers" style="display: none;">
+        <div id="containerA" class="combat-row"> <!-- Nouveau conteneur A -->
+            <div id="container1" class="combat-container"></div>
+            <div id="container2" class="combat-container"></div>
+        </div>
+    </div>
+
+    <div id="choix_combat" style="display: none;"> <!-- Nouveau conteneur B -->
+        <div id="container3" class="combat-container horizontal"></div>
+    </div>
+
+
+    <script src="../static/script.js"></script>
+
+</body>
+</html>
