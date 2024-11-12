@@ -140,7 +140,9 @@ function InitialiseValeur() {
     };
 }
 
-function mettreAJourMana() {document.getElementById("Joueur.Mana").textContent = `${Joueur.Mana}/${Joueur.manamax} 💧 `;}
+function mettreAJourMana() {
+    if (Joueur.Mana > Joueur.manamax) {Joueur.Mana = Joueur.manamax;}
+    document.getElementById("Joueur.Mana").textContent = `${Joueur.Mana}/${Joueur.manamax} 💧 `;}
 
 function jouerBoucleVideo() {
     video.play();
