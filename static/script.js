@@ -131,7 +131,7 @@ function InitialiseValeur() {
         Mana: 0, //fait
         manamax: 10, //fait
         hp: 100, //fait
-        nb_de_potion: 5, //fait
+        nb_de_potion: 2, //fait
         nb_de_kill: 0, //fait
         or: 100, // fait
         montantEssence: 0, //fait
@@ -143,6 +143,8 @@ function InitialiseValeur() {
 function mettreAJourMana() {
     if (Joueur.Mana > Joueur.manamax) {Joueur.Mana = Joueur.manamax;}
     document.getElementById("Joueur.Mana").textContent = `${Joueur.Mana}/${Joueur.manamax} 💧 `;}
+
+function updateEssenceText() {document.getElementById("instruction-text").textContent = `Clique sur un sort pour l'améliorer Essence : ${Joueur.montantEssence} 🌺`;}
 
 function jouerBoucleVideo() {
     video.play();
@@ -178,6 +180,13 @@ function jouerFleche() {
     SonFleche.volume = 1;
     SonFleche.currentTime = 0; // Remet à zéro pour rejouer
     SonFleche.play();
+}
+
+function jouerupsort() {
+    const sonupsort = document.getElementById("sonupsort");
+    sonupsort.volume = 1;
+    sonupsort.currentTime = 0; // Remet à zéro pour rejouer
+    sonupsort.play();
 }
 
 function jouerMalediction() {
@@ -978,7 +987,7 @@ function mort_ennemi() {
         Joueur.min_hp_potion += ajoutHpPotion1;
         gain3 = `gain de ${ajoutHpPotion1} ❤️ de vie au minimum de la potion`;
         // Gain de potions et d'or
-        const ajoutPotions1 = 10;
+        const ajoutPotions1 = Math.floor(Math.random() * 3) + 1;
         const ajoutOr1 = Math.floor(Math.random() * 51) + 150 + (50 * Joueur.nb_de_kill);  // Entre 50 et 100 + bonus
         Joueur.nb_de_potion += ajoutPotions1;
         Joueur.or += ajoutOr1;
@@ -1302,7 +1311,7 @@ function OuvrirGrimoireMagasin() {
     const instructionText = document.createElement('div');
     instructionText.id = 'instruction-text';
     instructionText.classList.add('center-text-grimoire');
-    instructionText.innerText = `Clique sur un sort pour l'améliorer Essence : ${Joueur.montantEssence} 🌺`;
+    instructionText.textContent = `Clique sur un sort pour l'améliorer Essence : ${Joueur.montantEssence} 🌺`;
     grimoireContainer.appendChild(instructionText);
 
     // Crée le bouton de retour au magasin
@@ -1361,37 +1370,35 @@ function OuvrirGrimoireMagasin() {
 
         // Positionnement spécifique pour chaque sort (en pourcentage pour que cela reste dynamique)
         switch (i) {
-    case 1:
-        console.log('on a clic sur le sort 1');
-        sortContainer.style.top = '10%';  // Position en haut à gauche
-        sortContainer.style.left = '25%';
-        sortContainer.addEventListener('click', function() { SortMagasin(1); });
-        instructionText.innerText = `Clique sur un sort pour l'améliorer Essence : ${Joueur.montantEssence} 🌺`;
-        break;
-    case 2:
-        console.log('on a clic sur le sort 2');
-        sortContainer.style.top = '10%';  // Position en haut à droite
-        sortContainer.style.right = '25%';
-        sortContainer.addEventListener('click', function() { SortMagasin(2); });
-        instructionText.innerText = `Clique sur un sort pour l'améliorer Essence : ${Joueur.montantEssence} 🌺`;
-        break;
-    case 3:
-        console.log('on a clic sur le sort 3');
-        sortContainer.style.bottom = '30%'; // Position en bas à gauche
-        sortContainer.style.left = '25%';
-        sortContainer.addEventListener('click', function() { SortMagasin(3); });
-        instructionText.innerText = `Clique sur un sort pour l'améliorer Essence : ${Joueur.montantEssence} 🌺`;
-        break;
-    case 4:
-        console.log('on a clic sur le sort 4');
-        sortContainer.style.bottom = '30%'; // Position en bas à droite
-        sortContainer.style.right = '25%';
-        sortContainer.addEventListener('click', function() { SortMagasin(4); });
-        instructionText.innerText = `Clique sur un sort pour l'améliorer Essence : ${Joueur.montantEssence} 🌺`;
-        break;
-}
-
-
+            case 1:
+                console.log('on a clic sur le sort 1');
+                sortContainer.style.top = '10%';  // Position en haut à gauche
+                sortContainer.style.left = '25%';
+                sortContainer.addEventListener('click', function() { SortMagasin(1); });
+                updateEssenceText();
+                break;
+            case 2:
+                console.log('on a clic sur le sort 2');
+                sortContainer.style.top = '10%';  // Position en haut à droite
+                sortContainer.style.right = '25%';
+                sortContainer.addEventListener('click', function() { SortMagasin(2); });
+                updateEssenceText();
+                break;
+            case 3:
+                console.log('on a clic sur le sort 3');
+                sortContainer.style.bottom = '30%'; // Position en bas à gauche
+                sortContainer.style.left = '25%';
+                sortContainer.addEventListener('click', function() { SortMagasin(3); });
+                updateEssenceText();
+                break;
+            case 4:
+                console.log('on a clic sur le sort 4');
+                sortContainer.style.bottom = '30%'; // Position en bas à droite
+                sortContainer.style.right = '25%';
+                sortContainer.addEventListener('click', function() { SortMagasin(4); });
+                updateEssenceText();
+                break;
+        }
 
         // Ajouter le container de sort au grimoire
         grimoireContainer.appendChild(sortContainer);
@@ -1491,6 +1498,9 @@ function SortMagasin(sortId) {
     document.getElementById('confirm-upgrade').addEventListener('click', () => {
         if ((Joueur.montantEssence - sortData.Cout) >= 0) {
             Joueur.montantEssence -= sortData.Cout;
+            updateEssenceText();
+            console.log(`${Joueur.montantEssence} essences`);
+            jouerupsort();
             sortData.Amelioration += 1;
             if (sortId === 1) {
                 sortData.Resultat += 10;
@@ -1509,7 +1519,7 @@ function SortMagasin(sortId) {
                 sortData.Cout += 2;
             }
 
-            console.log(`Le sort sortData a été amélioré !`);
+            console.log(`Le sort ${sortId} a été amélioré !`);
             // Mettre à jour tous les tooltips
             const tooltipUpdate = {
                 1 : `REGEN`,
@@ -1560,7 +1570,7 @@ function SortMagasin(sortId) {
                 document.body.removeChild(errorContainer); // Supprime le container
             });
         }
-        document.getElementById("instruction-text").textContent = `Clique sur un sort pour l'améliorer Essence : ${Joueur.montantEssence} 🌺`;
+        updateEssenceText();
         document.getElementById("Joueur.montantEssence").textContent = Joueur.montantEssence + " 🌺";
 
     });
@@ -1588,11 +1598,11 @@ function OuvrirGrimoireCombat() {
     document.body.appendChild(grimoireContainer);
 
     // Ajouter le texte centré
-    const instructionText = document.createElement('div');
-    instructionText.id = 'instruction-text';
-    instructionText.classList.add('center-text-grimoire');
-    instructionText.innerText = `Clique sur un sort pour le lancer : ${Joueur.Mana} 💧`;
-    grimoireContainer.appendChild(instructionText);
+    const instructionText2 = document.createElement('div');
+    instructionText2.id = 'instruction-text2';
+    instructionText2.classList.add('center-text-grimoire');
+    instructionText2.innerText = `Clique sur un sort pour le lancer : ${Joueur.Mana} 💧`;
+    grimoireContainer.appendChild(instructionText2);
 
     // Bouton de retour
     const boutonRetour = document.createElement('button');
@@ -1741,7 +1751,7 @@ function OuvrirGrimoireCombat() {
                 console.log(`Lancement du sort ${Sorts[i].nom}`);
                 Joueur.Mana -= Sorts[i].CoutMana; // Décompte du mana
                 mettreAJourMana(); // Mettre à jour l'affichage du mana
-                instructionText.innerText = `Clique sur un sort pour le lancer : ${Joueur.Mana} 💧`;
+                instructionText2.innerText = `Clique sur un sort pour le lancer : ${Joueur.Mana} 💧`;
                 updateContainers();
                 SortLance(i)
             } else {
